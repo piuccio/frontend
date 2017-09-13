@@ -29,9 +29,11 @@ set +x
 echo "*** $PWD ***"
 set -x
 
-# set +x
-# echo "Move to flow root directory static/src/javascripts"
-# set -x
+set +x
+echo "Move to flow root directory static/src/javascripts"
+set -x
+
+flow --help
 
 # flow stop
 
@@ -39,7 +41,11 @@ set -x
 # echo "Stop flow server"
 # set -x
 
-# cd -
+cd -
+
+set +x
+echo "*** $PWD ***"
+set -x
 
 # set +x
 # echo "Return to directory $PWD"
