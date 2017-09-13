@@ -1,6 +1,6 @@
 @(page: model.Page)(implicit request: RequestHeader, context: model.ApplicationContext)
 
-@main(page){ }{
+@main(){ }{
 <div class="l-side-margins">
     <div class="content content--expired">
         <header class="content__head">
@@ -34,4 +34,4 @@
         @fragments.mostPopularPlaceholder("/")
     </div>
 </div>
-}
+}(page, request, context)

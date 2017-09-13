@@ -1,7 +1,23 @@
-@(page: model.PressedPage)(implicit request: RequestHeader, context: model.ApplicationContext)
+@()(implicit pageModel: model.PressedPage, request: RequestHeader, context: model.ApplicationContext)
 
-@main(page, projectName = Option("facia")){
-    @fragments.frontHead(page)
-}{
-    @views.FrontsCleaner(page, fragments.frontBody(page).toString)
-}
+@import fragments._
+@import fragments.page._
+@import fragments.page.body._
+
+@htmlTag(
+    //TODO: <head>
+    bodyTag(classes = Map())(
+        message(),
+        skipToMainContent(),
+        //top ad banner
+        //header
+        breakingNewsDiv(),
+        views.FrontsCleaner(pageModel, frontBody(pageModel)), //TODO:
+        twentyFourSevenTraining(),
+        footer(),
+        inlineJSNonBlocking(),
+        analytics.base() //TODO: implicit page?
+    ),
+    devTakeShot()
+)
+

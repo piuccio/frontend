@@ -10,7 +10,7 @@
     }
 }
 
-@main(model.CommercialExpiryPage(id = request.path)) { } {
+@main() { } {
     <div class="l-side-margins">
     <div class="content content--expired">
         <header class="content__head">
@@ -38,4 +38,4 @@
         </div>
     </div>
 </div>
-}
+}(model.CommercialExpiryPage(id= request.path), request, context)
