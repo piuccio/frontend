@@ -6,10 +6,10 @@ import reportError from 'lib/report-error';
 import highMerch from 'commercial/modules/high-merch';
 import { articleAsideAdvertsInit } from 'commercial/modules/article-aside-adverts';
 import { articleBodyAdvertsInit } from 'commercial/modules/article-body-adverts';
+import { glabsTrafficDriverInit } from 'commercial/modules/glabs-traffic-driver';
 import { closeDisabledSlots } from 'commercial/modules/close-disabled-slots';
 import prepareGoogletag from 'commercial/modules/dfp/prepare-googletag';
 import prepareSonobiTag from 'commercial/modules/dfp/prepare-sonobi-tag';
-import prepareSwitchTag from 'commercial/modules/dfp/prepare-switch-tag';
 import hostedAbout from 'commercial/modules/hosted/about';
 import { initHostedVideo } from 'commercial/modules/hosted/video';
 import hostedGallery from 'commercial/modules/hosted/gallery';
@@ -42,11 +42,11 @@ const commercialModules: Array<Array<any>> = [
 if (!commercialFeatures.adFree) {
     commercialModules.push(
         ['cm-prepare-sonobi-tag', prepareSonobiTag.init, true],
-        ['cm-prepare-switch-tag', prepareSwitchTag.init, true],
         ['cm-articleAsideAdverts', articleAsideAdvertsInit, true],
         ['cm-articleBodyAdverts', articleBodyAdvertsInit],
         ['cm-liveblogAdverts', initLiveblogAdverts, true],
-        ['cm-stickyTopBanner', initStickyTopBanner]
+        ['cm-stickyTopBanner', initStickyTopBanner],
+        ['cm-glabsTrafficDriver', glabsTrafficDriverInit, true]
     );
 }
 

@@ -3,7 +3,7 @@
 // temporarily commit preact libdef,
 // pending https://github.com/developit/preact/pull/782
 
-import react from 'react';
+import * as react from 'react';
 import { render } from 'react-dom';
 
 declare module "preact" {
@@ -24,3 +24,8 @@ declare module "preact" {
     declare export var options: Object;
 
 }
+
+// Because we inject the h pragma, flow assumes our jsx is React.
+// But because it's not and we're therefore not importing it,
+// it freaks out saying it's undeclared. This just makes it a global.
+declare var React: $Exports<'react'>;

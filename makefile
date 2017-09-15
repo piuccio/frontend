@@ -16,26 +16,22 @@ list: # PRIVATE
 # *********************** SETUP ***********************
 
 # Install all 3rd party dependencies.
-install: check-node check-yarn
-	@yarn install -s
+install: check-node-env
+	@yarn -s install
 	@make ui-install
 
 # Remove all 3rd party dependencies.
 uninstall: # PRIVATE
-	@rm -rf node_modules
+	@rm -rf node_modules **/node_modules
 	@echo 'All 3rd party dependencies have been uninstalled.'
 
 # Reinstall all 3rd party dependencies from scratch.
 # The nuclear option if `make install` hasn't worked.
 reinstall: uninstall install
 
-# Make sure we running a recent-enough version of Node.
-check-node: # PRIVATE
-	@./tools/check-node-version.js
-
-# Make sure yarn is installed, at the right version.
-check-yarn: # PRIVATE
-	@./tools/check-yarn.js
+# Make sure the local node env is up to scratch.
+check-node-env: # PRIVATE
+	@./tools/check-node-env.js
 
 # *********************** DEVELOPMENT ***********************
 
@@ -137,10 +133,10 @@ es6: install
 # *********************** UI ***********************
 
 ui-compile:
-	@cd ui && yarn compile -s
+	@cd ui && yarn -s compile
 
 ui-watch:
-	@cd ui && yarn watch -s
+	@cd ui && yarn -s watch
 
 ui-install:
-	@cd ui && yarn install -s
+	@cd ui && yarn -s install

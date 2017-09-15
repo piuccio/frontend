@@ -17,7 +17,7 @@ define([
 ], function (
     $,
     qwery,
-    Identity,
+    forms,
     Formstack,
     FormstackIframe,
     FormstackEmbedIframe,
@@ -25,7 +25,7 @@ define([
     Id,
     AccountProfile,
     PublicProfile,
-    EmailPreferences,
+    emailPreferences,
     DeleteAccount,
     UserAvatars,
     mediator,
@@ -40,7 +40,7 @@ define([
                         isEmbed = el.className.match(/\bformstack-embed\b/);
 
                     if (isEmbed) {
-                        new FormstackEmbedIframe(el, id, config).init();
+                        new FormstackEmbedIframe.FormstackEmbedIframe(el, id, config).init();
                     } else {
                         new Formstack(el, id, config).init();
                     }
@@ -49,28 +49,23 @@ define([
 
                 // Load old js if necessary
                 $('.js-formstack-iframe').each(function (el) {
-                    new FormstackIframe(el, config).init();
+                    new FormstackIframe.FormstackIframe(el, config).init();
                 });
             });
         },
         forgottenEmail: function () {
             mediator.on('page:identity:ready', function (config) {
-                Identity.forgottenEmail(config);
-            });
-        },
-        forgottenPassword: function () {
-            mediator.on('page:identity:ready', function (config) {
-                Identity.forgottenPassword(config);
+                forms.forgottenEmail(config);
             });
         },
         passwordToggle: function () {
             mediator.on('page:identity:ready', function (config) {
-                Identity.passwordToggle(config);
+                forms.passwordToggle(config);
             });
         },
         userAvatars: function () {
             mediator.on('page:identity:ready', function () {
-                UserAvatars.init();
+                UserAvatars.initUserAvatars();
             });
         },
         validationEmail: function () {
@@ -94,7 +89,7 @@ define([
 
         emailPreferences: function () {
             mediator.on('page:identity:ready', function () {
-                EmailPreferences.init();
+                emailPreferences.enhanceEmailPreferences();
             });
         },
 
@@ -109,7 +104,6 @@ define([
         init: function (config) {
             modules.initFormstack();
             modules.forgottenEmail();
-            modules.forgottenPassword();
             modules.passwordToggle();
             modules.userAvatars();
             modules.validationEmail();

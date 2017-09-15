@@ -27,6 +27,7 @@ const summariseAbTests = (testParticipations: Participations): string => {
 
 const getExtraDataInformation = (): Object => ({
     browser: window.navigator.userAgent,
+    referrer: document.referrer,
     page: window.location,
     width: window.innerWidth,
     adBlock: adblockBeingUsed,
@@ -97,7 +98,7 @@ const initForms = (): void => {
 
     // insert hidden extra data into forms
     $.forEachElement('#feedback__form input[name=extra]', elem => {
-        elem.value = JSON.stringify(getExtraDataInformation());
+        elem.value = JSON.stringify(getExtraDataInformation(), null, '  ');
     });
 };
 

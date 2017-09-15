@@ -44,8 +44,17 @@ const config = {
             },
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules)/,
-                loader: 'babel-loader',
+                oneOf: [
+                    {
+                        test: /(\/__inline__)/,
+                        exclude: /node_modules/,
+                        use: ['raw-loader', 'babel-loader'],
+                    },
+                    {
+                        exclude: /node_modules/,
+                        use: ['babel-loader'],
+                    },
+                ],
             },
             {
                 test: /\.css$/,
@@ -53,18 +62,9 @@ const config = {
                 use: ['to-string-loader', cssLoader],
             },
             {
-                test: /\.scss$/,
-                oneOf: [
-                    {
-                        test: /\.js\.scss$/,
-                        exclude: /node_modules/,
-                        use: [{ loader: 'styletron-loader' }, sassLoader],
-                    },
-                    {
-                        exclude: /node_modules/,
-                        use: ['to-string-loader', cssLoader, sassLoader],
-                    },
-                ],
+                test: /\.js\.scss$/,
+                exclude: /node_modules/,
+                use: ['styletron-loader', sassLoader],
             },
         ],
     },
@@ -74,6 +74,10 @@ const config = {
             'node_modules', // default location, but we're overiding above, so it needs to be explicit
         ],
         extensions: ['.js', '.jsx'],
+        alias: {
+            // some libs expect react, this stops them bundling it
+            react: 'preact',
+        },
     },
     resolveLoader: { modules: [path.resolve(ui, '__tools__'), 'node_modules'] },
     watchOptions: { ignored: /node_modules/ },

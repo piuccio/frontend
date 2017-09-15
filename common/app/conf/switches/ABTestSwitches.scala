@@ -6,16 +6,23 @@ import org.joda.time.LocalDate
 
 trait ABTestSwitches {
 
-  for ((edition, testId) <- Map(
-    International -> "ab-membership-engagement-international-experiment-test12",
-    Au -> "ab-au-memb-engagement-msg-copy-test8"
-  )) Switch(
-    SwitchGroup.ABTests,
-    testId,
-    s"Test effectiveness of engagement banners in the $edition edition for driving Membership & Contributions.",
-    owners = Seq(Owner.withGithub("rtyley")),
-    safeState = On,
-    sellByDate = new LocalDate(2017, 9, 8), // we'll be doing AB tests on this for a long time, don't want to break the build
+  Switch(
+    ABTests,
+    "ab-glabs-traffic-driver",
+    "Displays an ad slot that will drive traffic to GLabs content",
+    owners = Seq(Owner.withGithub("JonNorman")),
+    safeState = Off,
+    sellByDate = new LocalDate(2017, 9, 29),
+    exposeClientSide = true
+  )
+
+  Switch(
+    ABTests,
+    "ab-snippet-four-variants",
+    "Measure snippet open rate based on snippet design",
+    owners = Seq(Owner.withGithub("regiskuckaertz")),
+    safeState = Off,
+    sellByDate = new LocalDate(2017, 10, 6),
     exposeClientSide = true
   )
 
@@ -71,16 +78,6 @@ trait ABTestSwitches {
 
   Switch(
     ABTests,
-    "ab-tailor-survey",
-    "Integrate Tailor with ab tests",
-    owners = Seq(Owner.withGithub("oilnam"), Owner.withGithub("mike-ruane")),
-    safeState = Off,
-    sellByDate = new LocalDate(2017, 8, 31),
-    exposeClientSide = true
-  )
-
-  Switch(
-    ABTests,
     "ab-paid-content-vs-outbrain-2",
     "Displays a paid content widget instead of Outbrain",
     owners = Seq(Owner.withName("commercial team")),
@@ -115,17 +112,7 @@ trait ABTestSwitches {
     "Bootstrap the AB test framework to use the Epic to thank readers who have already supported the Guardian",
     owners = Seq(Owner.withGithub("Mullefa")),
     safeState = On,
-    sellByDate = new LocalDate(2017, 9, 5),
-    exposeClientSide = true
-  )
-
-  Switch(
-    ABTests,
-    "ab-acquisitions-epic-paypal-pay-in-epic",
-    "Test whether allowing readers to pay in-Epic increases the conversion rate.",
-    owners = Seq(Owner.withGithub("Mullefa"), Owner.withGithub("desbo")),
-    safeState = On,
-    sellByDate = new LocalDate(2017, 9, 11),
+    sellByDate = new LocalDate(2018, 9, 5),
     exposeClientSide = true
   )
 
@@ -141,11 +128,11 @@ trait ABTestSwitches {
 
   Switch(
     ABTests,
-    "ab-acquisitions-support-baseline",
-    "Test new S&C proposition against current membership/contribution offering across all channels",
-    owners = Seq(Owner.withGithub("svillafe")),
+    "ab-acquisitions-support-us-recurring-contribution",
+    "Test demand for recurring contributions in the US across all channels",
+    owners = Seq(Owner.withGithub("justinpinner")),
     safeState = Off,
-    sellByDate = new LocalDate(2017, 10, 13),
+    sellByDate = new LocalDate(2017, 10, 19),
     exposeClientSide = true
   )
 
