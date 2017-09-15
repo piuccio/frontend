@@ -6,6 +6,10 @@ declare var twttr: {
     }
 };
 
+// #? Consider moving the `ensure` definition to modules
+// that use Webpack's require.ensure. Or instead use
+// Webpack's dynamic import()
+// https://webpack.js.org/guides/code-splitting/#dynamic-imports
 declare var require: {
     (id: string): any,
     ensure(
